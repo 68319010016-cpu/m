@@ -1,0 +1,422 @@
+/* ==========================================
+   RESET & VARIABLES
+   ========================================== */
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --dark-bg: #0f172a;
+  --text-main: #334155;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
+  --white: #ffffff;
+  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #f8fafc;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* ==========================================
+   HEADER & NAVBAR BASE
+   ========================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--dark-bg);
+  z-index: 1000;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary), #60a5fa);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.1rem;
+}
+
+.logo .highlight {
+  color: #60a5fa;
+}
+
+/* Nav Menu List */
+.menu-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.menu-link:hover, .menu-link.active {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.arrow-icon {
+  font-size: 0.75rem;
+  transition: var(--transition);
+}
+
+.has-mega:hover .arrow-icon {
+  transform: rotate(180deg);
+}
+
+/* Mobile Toggle Button */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-toggle .icon-close {
+  display: none;
+}
+
+/* ==========================================
+   MEGA MENU DROPDOWN (DESKTOP)
+   ========================================== */
+.has-mega {
+  position: static; /* ให้ Mega Dropdown อิงตาม Container ใหญ่ */
+}
+
+.mega-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: var(--shadow-lg);
+  border-bottom: 3px solid var(--primary);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+/* Active Hover Desktop */
+.has-mega:hover .mega-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mega-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 280px;
+  gap: 2rem;
+}
+
+/* Mega Columns */
+.col-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.col-header i {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.col-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-bg);
+}
+
+.sub-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sub-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.sub-links a:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+/* Badges */
+.badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.badge-hot {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.badge-new {
+  background-color: #dbeafe;
+  color: var(--primary);
+}
+
+/* Promo Card inside Mega Menu */
+.mega-promo {
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+}
+
+.promo-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.promo-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.promo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.promo-card:hover .promo-image img {
+  transform: scale(1.05);
+}
+
+.promo-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #ef4444;
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.promo-body {
+  padding-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.promo-body h4 {
+  font-size: 0.95rem;
+  color: var(--dark-bg);
+  margin-bottom: 0.3rem;
+}
+
+.promo-body p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+}
+
+.btn-promo {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background-color: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.btn-promo:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================
+   HERO SECTION (DEMO)
+   ========================================== */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 72px);
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  color: var(--dark-bg);
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  color: var(--text-light);
+}
+
+/* ==========================================
+   RESPONSIVE (MOBILE & TABLET)
+   ========================================== */
+@media (max-width: 992px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  /* Slide-down Nav Menu */
+  .nav-menu {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background-color: var(--dark-bg);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+  }
+
+  .nav-menu.is-open {
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-list {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem 0;
+    gap: 0;
+  }
+
+  .menu-link {
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    justify-content: space-between;
+  }
+
+  /* Mobile Mega Menu Layout */
+  .mega-dropdown {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    background-color: #1e293b; /* เข้มกว่า Background เล็กน้อย */
+    border-bottom: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  /* เมื่อเปิด Accordion Mega Menu บนมือถือ */
+  .has-mega.active .mega-dropdown {
+    max-height: 2000px;
+  }
+
+  .has-mega.active .arrow-icon {
+    transform: rotate(180deg);
+  }
+
+  .mega-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .col-header h3 {
+    color: var(--white);
+  }
+
+  .sub-links a {
+    color: #94a3b8;
+  }
+
+  .mega-promo {
+    background-color: #0f172a;
+    border-color: #334155;
+  }
+
+  .promo-body h4 {
+    color: var(--white);
+  }
+
+  .promo-body p {
+    color: #94a3b8;
+  }
+}
